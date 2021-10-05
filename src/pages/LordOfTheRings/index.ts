@@ -1,0 +1,2 @@
+export { LordOfTheRings } from './LordOfTheRings';
+

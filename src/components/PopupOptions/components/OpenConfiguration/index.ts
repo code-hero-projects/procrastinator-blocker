@@ -1,0 +1,1 @@
+export { OpenConfiguration } from './OpenConfiguration';
