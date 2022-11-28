@@ -45,8 +45,6 @@ function SelectPageComponent({ selectPage, selectPageValues, onSelectPageChange,
       </Box>
       <Typography className={classes.explanationText}>{getSelectedPageExplanation()}</Typography>
     </Box>
-    
-    
   );
 }
 

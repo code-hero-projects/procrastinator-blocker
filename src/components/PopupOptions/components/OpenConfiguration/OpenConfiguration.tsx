@@ -1,6 +1,6 @@
+import * as React from 'react';
 import { Button, createStyles, withStyles, WithStyles } from '@material-ui/core';
 import { BrowserManager } from 'browserManager';
-import * as React from 'react';
 
 const styles = () =>
   createStyles({

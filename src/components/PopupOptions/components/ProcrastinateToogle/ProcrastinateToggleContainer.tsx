@@ -1,20 +1,16 @@
-import { BrowserManager } from 'browserManager';
-import { ProcrastinateMessages, ProcrastinateMessageTypes } from 'messages';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { BrowserManager } from 'browserManager';
+import { ProcrastinateMessages, ProcrastinateMessageTypes } from 'messages';
 import { ProcrastinateToggle } from './ProcrastinateToogle';
 
 export function ProcrastinateToggleContainer() {
-  const [procrastinate, setProcrastinate] = useState(true);
+  const [procrastinate, setProcrastinate] = useState(false);
 
   useEffect(() => {
-    BrowserManager.sendMessageToPopUp({ type: ProcrastinateMessages.READ_REQUEST_POPUP });
-
     BrowserManager.addMessageEventListener((message: ProcrastinateMessageTypes) => {
       switch (message.type) {
         case ProcrastinateMessages.READ_RESPONSE_POPUP:
-          setProcrastinate(message.payload);
-          break;
         case ProcrastinateMessages.SET_RESPONSE:
           setProcrastinate(message.payload);
         default:
@@ -23,7 +19,9 @@ export function ProcrastinateToggleContainer() {
     });
   }, []);
 
-  const onProcrastinateClick = () => BrowserManager.sendMessageToPopUp({ type: ProcrastinateMessages.SET_REQUEST, payload: !procrastinate });
+  const onProcrastinateClick = () => {
+    BrowserManager.sendMessageToPopUp({ type: ProcrastinateMessages.SET_REQUEST, payload: !procrastinate });
+  };
 
   return <ProcrastinateToggle procrastinate={procrastinate} onProcrastinateClick={onProcrastinateClick} />;
 }

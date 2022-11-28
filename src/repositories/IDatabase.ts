@@ -1,4 +1,4 @@
-import { Link } from 'entities';
+import { Link, Timer } from 'entities';
 
 export interface IRepository<T> {
   insert(entity: T): Promise<T>;
@@ -17,6 +17,7 @@ export interface IDatabase {
   getLinkRepository(): IRepository<Link>;
   getProcrastinateRepository(): ISimpleRepository<boolean>;
   getSelectedPageRepository(): ISimpleRepository<string>;
+  getTimerRepository(): ISimpleRepository<Timer>;
   setupData(): void;
   resetData(): Promise<void>;
 }

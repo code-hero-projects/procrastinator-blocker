@@ -1,4 +1,4 @@
-import { Link } from 'entities';
+import { Link, Timer } from 'entities';
 import { openDB } from 'idb';
 import { RANDOM } from 'pages';
 import { IDatabase, IRepository, ISimpleRepository } from 'repositories/IDatabase';
@@ -9,31 +9,36 @@ import { IndexedDbBaseSimpleRepository } from './IndexedDbBaseSimpleRepository';
 const LINK_OBJECT_STORE = 'link';
 const PROCRASTINATE_OBJECT_STORE = 'procrastinate';
 const SELECT_PAGE_OBJECT_STORE = 'select-page';
+const TIMER_OBJECT_STORE = 'timer';
 
 const LINK_PRIMARY_KEY = 'id';
 
 const PROCRASTINATE_KEY = 'procrastinate';
 const SELECT_PAGE_KEY = 'select-page';
+const TIMER_PAGE_KEY = 'timer';
 
-const PROCRASTINATE_INITIAL_VALUE = false;
+const PROCRASTINATE_INITIAL_VALUE = true;
 const SELECT_PAGE_INITIAL_VALUE = RANDOM;
+const TIMER_INITIAL_VALUE: Timer = { hours: 0, minutes: 0, start: new Date() }
 
 export class IndexedDbDatabase implements IDatabase {
   private links: Link[] = [
     { url: 'youtube' },
     { url: 'instagram' },
-    { url: 'facebook' }
+    { url: 'facebook' },
+    { url: 'tiktok' }
   ];
 
   private linkRepository: IRepository<Link>;
   private procrastinateRepository: ISimpleRepository<boolean>;
   private selectPageRepository: ISimpleRepository<string>;
+  private timerRepository: ISimpleRepository<Timer>;
 
   constructor() {
     this.linkRepository = new IndexedDbBaseEntityRepository<Link>(LINK_OBJECT_STORE);
     this.procrastinateRepository = new IndexedDbBaseSimpleRepository<boolean>(PROCRASTINATE_OBJECT_STORE, PROCRASTINATE_KEY);
     this.selectPageRepository = new IndexedDbBaseSimpleRepository<string>(SELECT_PAGE_OBJECT_STORE, SELECT_PAGE_KEY);
-    
+    this.timerRepository = new IndexedDbBaseSimpleRepository<Timer>(TIMER_OBJECT_STORE, TIMER_PAGE_KEY);
   }
 
   getLinkRepository(): IRepository<Link> {
@@ -46,6 +51,10 @@ export class IndexedDbDatabase implements IDatabase {
 
   getSelectedPageRepository(): ISimpleRepository<string> {
     return this.selectPageRepository;
+  }
+
+  getTimerRepository(): ISimpleRepository<Timer> {
+    return this.timerRepository;
   }
   
   async setupData(): Promise<void> {
@@ -65,6 +74,7 @@ export class IndexedDbDatabase implements IDatabase {
         insertObjectStore('link', LINK_OBJECT_STORE, { keyPath: LINK_PRIMARY_KEY, autoIncrement: true}, databaseContext.insertInitialLinks);
         insertObjectStore('procrastinate', PROCRASTINATE_OBJECT_STORE, { }, databaseContext.insertInitialProcrastinate);
         insertObjectStore('select page', SELECT_PAGE_OBJECT_STORE, { }, databaseContext.insertInitialSelectPage);
+        insertObjectStore('timer', TIMER_OBJECT_STORE, { }, databaseContext.insertIntialTimer);
       }
     });
   }
@@ -96,4 +106,9 @@ export class IndexedDbDatabase implements IDatabase {
     await this.selectPageRepository.set(SELECT_PAGE_INITIAL_VALUE);
     console.log('initial select page inserted successfully');
   };
+
+  private insertIntialTimer = async () => {
+    await this.timerRepository.set(TIMER_INITIAL_VALUE);
+    console.log('initial timer inserted successfully');
+  }
 }
