@@ -18,6 +18,7 @@ export class ProcrastinateMessageHandler implements IMessageHandler {
           this.procrastinateRepository.set(message.payload).then(() => {
             const messageToSend = { type: ProcrastinateMessages.SET_RESPONSE, payload: message.payload};
             BrowserManager.sendMessage(messageToSend);
+            console.log('procrastinate set request');
           });
           break;
         case ProcrastinateMessages.READ_REQUEST_POPUP:

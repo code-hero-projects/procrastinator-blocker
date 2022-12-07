@@ -19,7 +19,7 @@ const TIMER_PAGE_KEY = 'timer';
 
 const PROCRASTINATE_INITIAL_VALUE = true;
 const SELECT_PAGE_INITIAL_VALUE = RANDOM;
-const TIMER_INITIAL_VALUE: Timer = { hours: 0, minutes: 0, start: new Date() }
+const TIMER_INITIAL_VALUE: Timer = { hours: 0, minutes: 1 };
 
 export class IndexedDbDatabase implements IDatabase {
   private links: Link[] = [

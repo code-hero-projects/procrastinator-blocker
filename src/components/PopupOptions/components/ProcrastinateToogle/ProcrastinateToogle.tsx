@@ -12,19 +12,15 @@ const styles = () =>
   });
 
 interface ProcrastinateProps {
-  procrastinate: boolean;
   onProcrastinateClick: () => void;
 }
 
 type ProcrastinateTogglePropsStyles = ProcrastinateProps & WithStyles<typeof styles>;
 
-function ProcrastinateToggleComponent({ classes, procrastinate, onProcrastinateClick }: ProcrastinateTogglePropsStyles) {
-  const buttonColor = procrastinate ? 'primary' : 'secondary';
-  const buttonText = procrastinate ? 'START' : 'STOP';
-
+function ProcrastinateToggleComponent({ classes, onProcrastinateClick }: ProcrastinateTogglePropsStyles) {
   return (
-    <Button className={classes.button} variant='contained' color={buttonColor} onClick={onProcrastinateClick}>
-      {buttonText}
+    <Button className={classes.button} variant='contained' color='primary' onClick={onProcrastinateClick}>
+      START
     </Button>
   );
 };

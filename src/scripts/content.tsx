@@ -7,7 +7,9 @@ import {
   ResetDataMessages,
   ResetDataMessageTypes,
   SelectPageMessages,
-  SelectPageMessageTypes
+  SelectPageMessageTypes,
+  TimerMessages,
+  TimerMessagesTypes
 } from 'messages';
 import { mapPage, RANDOM, stopProcrastinationPages } from 'pages';
 import * as React from 'react';
@@ -30,6 +32,7 @@ BrowserManager.addMessageEventListener((message: ProcrastinateMessageTypes) => {
   switch (message.type) {
     case ProcrastinateMessages.READ_RESPONSE_ACTIVE_TAB:
     case ProcrastinateMessages.SET_RESPONSE:
+      console.log('procrastinate changed');
       const procrastinate = message.payload;
       procrastinateHandler(procrastinate);
     default:
@@ -108,6 +111,18 @@ BrowserManager.addMessageEventListener((message: ResetDataMessageTypes) => {
   switch (message.type) {
     case ResetDataMessages.RESET_DATA_SET_RESPONSE:
       BrowserManager.sendMessageToTabs({ type: LinkMessages.READ_ALL_REQUEST });
+      break;
+    default:
+      break;
+  }
+});
+
+// Listen to timeout
+BrowserManager.addMessageEventListener((message: TimerMessagesTypes) => {
+  switch (message.type) {
+    case TimerMessages.START_RESPONSE:
+      console.log('received START_RESPONSE message');
+      BrowserManager.sendMessage({ type: ProcrastinateMessages.SET_REQUEST, payload: true });
       break;
     default:
       break;
