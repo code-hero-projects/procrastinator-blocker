@@ -1,10 +1,10 @@
 import { BrowserManager } from 'browserManager';
 import { ProcrastinateMessages, ProcrastinateMessageTypes } from 'messages';
+import { Configuration } from './Configuration';
 import * as React from 'react';
 import { useEffect } from 'react';
-import { PopupOptions } from './PopupOptions';
 
-export function PopupOptionsContainer() {
+export function ConfigurationContainer() {
   const [loading, setLoading] = React.useState(true);
   const [procrastinate, setProcrastinate] = React.useState(true);
 
@@ -30,5 +30,5 @@ export function PopupOptionsContainer() {
     return <></>;
   }
 
-  return <PopupOptions procrastinate={procrastinate} />;
+  return <Configuration procrastinate={procrastinate} />;
 }

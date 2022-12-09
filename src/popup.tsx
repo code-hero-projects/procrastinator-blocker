@@ -1,6 +1,6 @@
-import { PopupOptions } from 'components';
+import { PopupOptionsContainer } from 'components';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 var mountNode = document.getElementById('popup');
-ReactDOM.render(<PopupOptions />, mountNode);
+ReactDOM.render(<PopupOptionsContainer />, mountNode);

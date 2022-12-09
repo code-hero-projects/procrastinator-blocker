@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { Box, createStyles, withStyles, WithStyles } from '@material-ui/core';
 import { OpenConfiguration, ProcrastinateToggleContainer, TimerAlarmContainer } from './components';
-import { BrowserManager } from 'browserManager';
-import { ProcrastinateMessages, ProcrastinateMessageTypes } from 'messages';
-import { useEffect } from 'react';
 
 const styles = () =>
   createStyles({
@@ -13,36 +10,13 @@ const styles = () =>
     }
   });
 
-type PopupOptionsStyles = WithStyles<typeof styles>;
+export interface PopupOptionsProps {
+  procrastinate: boolean;
+}
 
-function PopupOptionsComponent({ classes }: PopupOptionsStyles) {
-  const [loading, setLoading] = React.useState(true);
-  const [procrastinate, setProcrastinate] = React.useState(true);
+type PopupOptionsStyles = PopupOptionsProps & WithStyles<typeof styles>;
 
-  useEffect(() => {
-    BrowserManager.sendMessageToPopUp({ type: ProcrastinateMessages.READ_REQUEST_POPUP });
-
-    BrowserManager.addMessageEventListener((message: ProcrastinateMessageTypes) => {
-      switch (message.type) {
-        case ProcrastinateMessages.READ_RESPONSE_POPUP:
-          setProcrastinate(message.payload);
-          setLoading(false);
-          break;
-        case ProcrastinateMessages.SET_RESPONSE:
-          setProcrastinate(message.payload);
-          break;
-        default:
-          break;
-      }
-    });
-  }, []);
-  
-  if (loading) {
-    return <></>;
-  }
-
-  const onProcrastinateChange = () => setProcrastinate(!procrastinate)
-
+function PopupOptionsComponent({ classes, procrastinate }: PopupOptionsStyles) {
   return (
     <>
       {!procrastinate && <Box className={classes.box}>

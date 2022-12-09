@@ -3,19 +3,23 @@ import * as React from 'react';
 import { LinkTableContainer, ResetDataContainer, SelectPageContainer } from './components';
 import { TimerSetupContainer } from './components/TimerSetup';
 
-export function Configuration() {
+export interface ConfigurationProps {
+  procrastinate: boolean;
+}
+
+export function Configuration({ procrastinate }: ConfigurationProps) {
   return (
     <Box>
-      <TimerSetupContainer />
-      <Box mt={3}>
-        <LinkTableContainer />
+      {procrastinate && <TimerSetupContainer />}
+      <Box mt={procrastinate ? 3 : 0}>
+        <LinkTableContainer procrastinate={procrastinate} />
       </Box>
       <Box mt={3}>
         <SelectPageContainer />
       </Box>
-      <Box mt={3}>
+      {procrastinate && <Box mt={3}>
         <ResetDataContainer />
-      </Box>
+      </Box>}
     </Box>
   );
 }

@@ -31,13 +31,14 @@ const styles = () => createStyles({
 
 interface LinkTableProps {
   links: Array<Link>;
+  procrastinate: boolean;
   onDelete(id: number): void;
   onAdd(newUrl: string): void;
 }
 
 type LinkTablePropsStyles = LinkTableProps & WithStyles<typeof styles>;
 
-function LinkTableComponent({ links, onDelete, onAdd, classes }: LinkTablePropsStyles) {
+function LinkTableComponent({ links, procrastinate, onDelete, onAdd, classes }: LinkTablePropsStyles) {
   const [newUrl, setNewUrl] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
 
@@ -74,11 +75,11 @@ function LinkTableComponent({ links, onDelete, onAdd, classes }: LinkTablePropsS
             {sortedLinks.map(link => (
               <TableRow key={link.id} hover={true}>
                 <TableCell>{link.url}</TableCell>
-                <TableCell>
+                {procrastinate && <TableCell>
                   <Button variant='contained' color='secondary' onClick={() => onDelete(link.id!)}>
                     Delete
                   </Button>
-                </TableCell>
+                </TableCell>}
               </TableRow>
             ))}
             <TableRow>

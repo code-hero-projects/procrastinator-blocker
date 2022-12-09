@@ -5,7 +5,11 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { LinkTable } from './LinkTable';
 
-export function LinkTableContainer() {
+export interface LinkTableContainerProps {
+  procrastinate: boolean;
+}
+
+export function LinkTableContainer({ procrastinate }: LinkTableContainerProps) {
   const [links, setLinks] = useState<Array<Link>>([]);
   
   const sendReadAllConfigurationRequest = () => BrowserManager.sendMessageToPopUp({ type: LinkMessages.READ_ALL_CONFIGURATION_REQUEST });
@@ -42,5 +46,5 @@ export function LinkTableContainer() {
     BrowserManager.sendMessageToPopUp({ type: LinkMessages.INSERT_REQUEST, payload: newLink });
   }
 
-  return <LinkTable links={links} onDelete={onDelete} onAdd={onAdd} />;
+  return <LinkTable links={links} procrastinate={procrastinate} onDelete={onDelete} onAdd={onAdd} />;
 }

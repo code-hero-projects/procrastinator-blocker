@@ -1,1 +1,1 @@
-export { Configuration } from './Configuration';
+export { ConfigurationContainer } from './ConfigurationContainer';

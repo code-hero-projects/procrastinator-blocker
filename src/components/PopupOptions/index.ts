@@ -1,1 +1,1 @@
-export { PopupOptions } from './PopupOptions';
+export { PopupOptionsContainer } from './PopupOptionsContainer';
