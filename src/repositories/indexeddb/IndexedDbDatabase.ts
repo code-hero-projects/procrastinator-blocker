@@ -26,7 +26,12 @@ export class IndexedDbDatabase implements IDatabase {
     { url: 'youtube' },
     { url: 'instagram' },
     { url: 'facebook' },
-    { url: 'tiktok' }
+    { url: 'tiktok' },
+    { url: 'reddit' },
+    { url: 'netflix' },
+    { url: 'twitch' },
+    { url: 'amazon' },
+    { url: 'twitter' }
   ];
 
   private linkRepository: IRepository<Link>;
