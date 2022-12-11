@@ -1,6 +1,6 @@
 {
   "name": "Procrastination Blocker",
-  "description": "Chrome Extension to stop procrastination!",
+  "description": "Time to stop procrastination!",
   "manifest_version": 3,
   "version": "1.0.0",
   "action": {
