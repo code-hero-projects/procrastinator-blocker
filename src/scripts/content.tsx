@@ -35,9 +35,13 @@ BrowserManager.addMessageEventListener((message: TimerMessagesTypes) => {
       break;
     case TimerMessages.READ_RESPONSE_ACTIVE_TAB:
       const timer = message.payload;
-      if (timer.endDate && timer.endDate < Date.now()) {
-        console.log('time has ended, resetting procrastinate');
-        BrowserManager.sendMessage({ type: ProcrastinateMessages.SET_REQUEST, payload: true });
+      if (timer.endDate) {
+        if (timer.endDate < Date.now()) {
+          console.log('time has ended, resetting procrastinate');
+          BrowserManager.sendMessage({ type: ProcrastinateMessages.SET_REQUEST, payload: true });  
+        } else {
+          procrastinateHandler(false);
+        }
       }
       break;
     default:
