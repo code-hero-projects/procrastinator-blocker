@@ -22,10 +22,28 @@ const MATCHED_URL = 'matched-url';
 const TRUE = 'true';
 const FALSE = 'false'
 
-BrowserManager.sendMessageToPopUp({ type: ProcrastinateMessages.READ_REQUEST_ACTIVE_TAB });
-
 BrowserManager.setInLocalStorage(PAGE_RELOADED, TRUE);
 BrowserManager.setInLocalStorage(COMPONENT_SHOWN, FALSE);
+
+BrowserManager.sendMessageToPopUp({ type: TimerMessages.READ_REQUEST_ACTIVE_TAB });
+
+// Listen to timeout
+BrowserManager.addMessageEventListener((message: TimerMessagesTypes) => {
+  switch (message.type) {
+    case TimerMessages.START_RESPONSE:
+      BrowserManager.sendMessage({ type: ProcrastinateMessages.SET_REQUEST, payload: true });
+      break;
+    case TimerMessages.READ_RESPONSE_ACTIVE_TAB:
+      const timer = message.payload;
+      if (timer.endDate && timer.endDate < Date.now()) {
+        console.log('time has ended, resetting procrastinate');
+        BrowserManager.sendMessage({ type: ProcrastinateMessages.SET_REQUEST, payload: true });
+      }
+      break;
+    default:
+      break;
+  }
+});
 
 // Listen to procrastinate toggle
 BrowserManager.addMessageEventListener((message: ProcrastinateMessageTypes) => {
@@ -111,18 +129,6 @@ BrowserManager.addMessageEventListener((message: ResetDataMessageTypes) => {
   switch (message.type) {
     case ResetDataMessages.RESET_DATA_SET_RESPONSE:
       BrowserManager.sendMessageToTabs({ type: LinkMessages.READ_ALL_REQUEST });
-      break;
-    default:
-      break;
-  }
-});
-
-// Listen to timeout
-BrowserManager.addMessageEventListener((message: TimerMessagesTypes) => {
-  switch (message.type) {
-    case TimerMessages.START_RESPONSE:
-      console.log('received START_RESPONSE message');
-      BrowserManager.sendMessage({ type: ProcrastinateMessages.SET_REQUEST, payload: true });
       break;
     default:
       break;
