@@ -1,0 +1,1 @@
+export { Gladiator } from './Gladiator';

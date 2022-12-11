@@ -1,6 +1,6 @@
 import { BrowserManager } from 'browserManager';
 import { SelectPageMessages, SelectPageMessageTypes } from 'messages';
-import { LORD_OF_THE_RINGS, PULP_FICTION, RANDOM, STAR_WARS } from 'pages';
+import { GLADIATOR, HARRY_POTTER, LORD_OF_THE_RINGS, PULP_FICTION, RANDOM, STAR_WARS } from 'pages';
 import * as React from 'react';
 import { useState } from 'react';
 import { SelectPage } from './SelectPage';
@@ -10,9 +10,11 @@ export function SelectPageContainer() {
   const [selectedPage, setSelectedPage] = useState<string>('');
   const selectPageValues: Array<SelectPageValue> = [
     { value: RANDOM, displayName: 'Random', explanation: 'A random page will be shown.' },
-    { value: LORD_OF_THE_RINGS, displayName: 'Lord Of The Rings', explanation: 'It\'s you vs Gandalf.' },
-    { value: PULP_FICTION, displayName: 'Pulp Fiction', explanation: 'Jules breaks your concentration.' },
-    { value: STAR_WARS, displayName: 'Star Wars', explanation: 'Obi-Wan will set you straight.' },
+    { value: LORD_OF_THE_RINGS, displayName: 'Lord Of The Rings', explanation: 'Can you pass through Gandalf?.' },
+    { value: PULP_FICTION, displayName: 'Pulp Fiction', explanation: 'English, do you speak it?.' },
+    { value: STAR_WARS, displayName: 'Star Wars', explanation: 'Execute order Get Back To Work.' },
+    { value: GLADIATOR, displayName: 'Gladiator', explanation: 'His name is Maximus Decimus Meridius.' },
+    { value: HARRY_POTTER, displayName: 'Harry Potter', explanation: 'It\'s leviosa, not leviosaaa!' },
   ];
 
   React.useEffect(() => {

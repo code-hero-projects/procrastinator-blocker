@@ -39,7 +39,13 @@
     "storage"
   ],
   "web_accessible_resources": [{
-    "resources": ["assets/lord-of-the-rings.mp4", "assets/pulp-fiction.mp4", "assets/star-wars.mp4"],
+    "resources": [
+      "assets/lord-of-the-rings.mp4",
+      "assets/pulp-fiction.mp4",
+      "assets/star-wars.mp4",
+      "assets/gladiator.mp4",
+      "assets/harry-potter.mp4"
+    ],
     "matches": ["<all_urls>"]
   }]
 }
