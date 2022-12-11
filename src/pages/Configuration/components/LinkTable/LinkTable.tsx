@@ -62,7 +62,7 @@ function LinkTableComponent({ links, procrastinate, onDelete, onAdd, classes }: 
 
   return (
     <Box>
-      <Typography variant='h6'>Manage the links where the extension is enable</Typography>
+      <Typography variant='h6'>Links where the extension is enabled</Typography>
       <TableContainer component={Paper} className={classes.table}>
         <Table aria-label='simple table'>
           <TableHead>

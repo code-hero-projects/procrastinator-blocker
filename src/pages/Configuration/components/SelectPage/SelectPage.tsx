@@ -32,7 +32,7 @@ function SelectPageComponent({ selectPage, selectPageValues, onSelectPageChange,
   return (
     <Box>
       <Box display='flex' alignItems='center' className={selectPage}>
-        <Typography variant='h6' className={classes.selectPageText}>Select a page to appear:</Typography>
+        <Typography variant='h6' className={classes.selectPageText}>Select a page to appear</Typography>
         <FormControl>
           <Select
             value={selectPage}

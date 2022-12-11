@@ -33,7 +33,7 @@ function TimerSetupComponent({ classes, hours, minutes, onUpdateHours, onUpdateM
 
   return (
     <>
-      <Typography variant='h6'>Time the extension is active:</Typography>
+      <Typography variant='h6'>Time the extension is active</Typography>
       <Box display='flex' className={classes.inputs}>
         <TextField label='Hours' variant='outlined' size='small' value={inputHours} onChange={onChangeHours}></TextField>
         <Typography variant='h6' className={classes.separator}>:</Typography>
