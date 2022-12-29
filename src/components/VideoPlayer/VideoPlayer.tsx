@@ -30,7 +30,7 @@ function VideoPlayerComponent({ video, onFinish, classes }: VideoPlayerPropsStyl
   const onLoadedData = () => playMedia(videoRef);
 
   return (
-    <video autoPlay onEnded={onFinish} onLoadedData={onLoadedData} ref={videoRef} className={classes.video}>
+    <video autoPlay controls onEnded={onFinish} onLoadedData={onLoadedData} ref={videoRef} className={classes.video}>
       <source src={videoURL} type='video/mp4' />
     </video>
   );
